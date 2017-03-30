@@ -21,7 +21,7 @@ public class BooksServiceTest {
 		randomIsbnGenerator.setCountryCode("-de");
 		mapBooksService.setIsbnGenerator(randomIsbnGenerator);
 		mapBooksService.setStoreService(new SimpleStoreService());
-		randomIsbnGenerator.setPrefiX("TEST:");
+		randomIsbnGenerator.setPrefix("TEST:");
 		
 		TestActor.doTest(mapBooksService);
 		

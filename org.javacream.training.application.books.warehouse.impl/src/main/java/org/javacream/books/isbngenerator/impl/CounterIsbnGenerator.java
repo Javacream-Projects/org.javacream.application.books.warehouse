@@ -4,7 +4,7 @@ import org.javacream.books.isbngenerator.api.IsbnGenerator;
 
 public class CounterIsbnGenerator implements IsbnGenerator {
 
-	private String _prefix;
+	private String prefix;
 	private String countryCode;
 	public String getCountryCode() {
 		return countryCode;
@@ -15,13 +15,13 @@ public class CounterIsbnGenerator implements IsbnGenerator {
 	}
 	private int counter;
 	public String next(){
-		return _prefix + counter++ + countryCode;
+		return prefix + counter++ + countryCode;
 	}
 
 	public String getPrefix(){
-		return _prefix;
+		return prefix;
 	}
-	public void setPrefiX(String prefix) {
-		this._prefix = prefix;
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
 	}
 }

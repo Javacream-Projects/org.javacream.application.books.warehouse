@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.javacream.books.isbngenerator.api.IsbnGenerator;
-import org.javacream.books.warehouse.api.BookException;
 import org.javacream.books.warehouse.api.Book;
+import org.javacream.books.warehouse.api.BookException;
 import org.javacream.books.warehouse.api.BooksService;
 import org.javacream.store.api.StoreService;
 
@@ -52,10 +52,10 @@ public class MapBooksService implements BooksService {
 
 	public String newBook(String title) throws BookException {
 		String isbn = isbnGenerator.next();
-		Book detail = new Book();
-		detail.setIsbn(isbn);
-		detail.setTitle(title);
-		books.put(isbn, detail);
+		Book book = new Book();
+		book.setIsbn(isbn);
+		book.setTitle(title);
+		books.put(isbn, book);
 		return isbn;
 	}
 
@@ -70,21 +70,14 @@ public class MapBooksService implements BooksService {
 		}
 		result.setAvailable(storeService.getStock("books", isbn) > 0);
 		
-		return result;
+		return SerializationUtils.clone(result);
 	}
 
 	public Book updateBook(Book bookValue) throws BookException {
-		books.put(bookValue.getIsbn(), bookValue); 
+		books.put(bookValue.getIsbn(), SerializationUtils.clone(bookValue)); 
 		return bookValue;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.javacream.books.BooksManager#deleteBook(org.javacream.books.value
-	 * .FindBookValue)
-	 */
 	public void deleteBookByIsbn(String isbn) throws BookException {
 		Object result = books.remove(isbn);
 		if (result == null) {
