@@ -8,14 +8,12 @@ public class Order implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private long id;
 	private String isbn;
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + amount;
-		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		long temp;
@@ -36,8 +34,6 @@ public class Order implements Serializable{
 		Order other = (Order) obj;
 		if (amount != other.amount)
 			return false;
-		if (id != other.id)
-			return false;
 		if (isbn == null) {
 			if (other.isbn != null)
 				return false;
@@ -53,8 +49,7 @@ public class Order implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", isbn=" + isbn + ", totalPrice=" + totalPrice + ", status=" + status + ", amount="
-				+ amount + "]";
+		return "Order [isbn=" + isbn + ", totalPrice=" + totalPrice + ", status=" + status + ", amount=" + amount + "]";
 	}
 
 
