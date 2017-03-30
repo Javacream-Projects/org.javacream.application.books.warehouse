@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<bean class="org.javacream.books.warehouse.impl.MapBooksService"
+		id="mapBooksService">
+		<property name="isbnGenerator" ref="randomIsbnGenerator" />
+		<property name="storeService" ref="simpleStoreService">
+		</property>
+		<property name="books" ref="books" />
+	</bean>
+
+	<util:map id="books" key-type="java.lang.String"
+		value-type="org.javacream.books.warehouse.api.Book">
+		<entry key="ISBN1">
+			<bean class="org.javacream.books.warehouse.api.Book" id="book1">
+				<property name="isbn" value="ISBN1" />
+				<property name="title" value="Title1" />
+				<property name="price" value="19.99" />
+			</bean>
+		</entry>
+		<entry key="ISBN2" value-ref="book2" />
+	</util:map>
+
+	<bean class="org.javacream.books.warehouse.api.Book" id="book2">
+		<property name="isbn" value="ISBN2"></property>
+		<property name="title" value="Title2" />
+		<property name="price" value="9.99" />
+	</bean>
+
+</beans>
